@@ -4,6 +4,7 @@ straight/
 # cache
 company-statistics-cache.el
 eln-cache/
+transient/
 # history
 history
 recentf
