@@ -417,7 +417,10 @@
   (web-mode-css-indent-offset 2))
 
 (use-package prettier
-  :ensure t)
+  :ensure t
+  :hook
+  ((typescript-ts-mode . prettier-mode)
+   (tsx-ts-mode . prettier-mode)))
 
 ;;; Golang
 (use-package go-mode
