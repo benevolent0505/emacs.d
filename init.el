@@ -232,6 +232,10 @@
 
 (use-package editorconfig
   :ensure t
+  :straight '(editorconfig
+              :type git
+              :host github
+              :repo "editorconfig/editorconfig-emacs")
   :config
   (editorconfig-mode 1))
 
