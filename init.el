@@ -102,7 +102,7 @@
      (cl-callf color-saturate-name (face-foreground face) 30)))
   :hook prog-mode)
 
-(set-face-attribute 'default nil :family "UDEV Gothic NF" :height 140)
+(set-face-attribute 'default nil :family "UDEV Gothic NF" :height 110)
 
 (use-package modus-themes
   :ensure t
