@@ -501,7 +501,7 @@
   (defun wsl-paste ()
     (interactive)
     (insert
-     ;;; trim
+     ;;; trim new line
      (replace-regexp-in-string
       "\^M"
       ""
@@ -548,5 +548,3 @@
     (setopt ellama-summarize-prompt-template "Text:\n%s\n要約して")
     (setopt ellama-generate-commit-message-template "あなたは熟練のプログラマーです。後の変更点をもとに完結なコミットメッセージを書いてください。コミットメッセージの形式は、1行目は変更点の要約、2行目は空行、それ以降の行は変更全体の詳細な説明です、です。出力はプロンプト無しで最終的なコミットメッセージだけにしてください。\n\n変更点:\n%s\n")
     ))
-
-
