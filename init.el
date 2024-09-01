@@ -413,9 +413,10 @@
 
 (use-package add-node-modules-path
   :ensure t
-  :hook
-  ((js2-mode-hook . add-node-modules-path)
-   (typescript-ts-mode-hook . add-node-modules-path)))
+  :config
+  (setq add-node-modules-path-command '("echo \"$(npm root)/.bin\""))
+  (add-hook 'typescript-ts-mode-hook #'add-node-modules-path)
+  (add-hook 'tsx-ts-mode-hook #'add-node-modules-path))
 
 (use-package web-mode
   :ensure t
