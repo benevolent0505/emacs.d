@@ -112,7 +112,7 @@
   :config
   (load-theme 'modus-vivendi-deuteranopia t))
 
-(set-frame-parameter nil 'alpha 95)
+(set-frame-parameter nil 'alpha 90)
 
 (setq-default indent-tabs-mode nil
               tab-width 2
