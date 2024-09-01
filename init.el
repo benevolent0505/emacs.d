@@ -349,6 +349,9 @@
   :config
   (eglot-booster-mode))
 
+(use-package consult-eglot
+  :ensure t)
+
 (use-package treesit-auto
   :ensure t
   :config
