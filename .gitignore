@@ -5,6 +5,7 @@ straight/
 company-statistics-cache.el
 eln-cache/
 transient/
+tree-sitter/
 # history
 history
 recentf
