@@ -349,6 +349,12 @@
   :config
   (eglot-booster-mode))
 
+(use-package treesit-auto
+  :ensure t
+  :config
+  (setq treesit-auto-install t)
+  (global-treesit-auto-mode))
+
 (setq treesit-extra-load-path `(locate-user-emacs-file "tree-sitter"))
 (use-package treesit
   :config
