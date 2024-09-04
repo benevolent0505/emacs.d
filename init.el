@@ -388,6 +388,11 @@
   (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode)
   (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode))
 
+(use-package flycheck-color-mode-line
+  :ensure t
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
+
 (use-package eldoc
   :ensure t)
 
