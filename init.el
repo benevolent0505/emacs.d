@@ -473,9 +473,8 @@
 
 (use-package flycheck-golangci-lint
   :ensure t
-  :requires (flycheck go-mode)
-  :hook
-  (go-mode . flycheck-golangci-lint-setup))
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
 (use-package go-gen-test
   :ensure t)
