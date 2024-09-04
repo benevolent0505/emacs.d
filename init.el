@@ -393,6 +393,11 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
 
+(use-package flycheck-posframe
+  :ensure t
+  :after flycheck
+  :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+
 (use-package eldoc
   :ensure t)
 
