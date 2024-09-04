@@ -471,6 +471,7 @@
   :hook
   (go-mode . eglot-ensure))
 
+;; Note: .dir-locals.el で flycheck-golangci-lint-config の設定を書くこと
 (use-package flycheck-golangci-lint
   :ensure t
   :config
