@@ -104,6 +104,11 @@
 
 (set-face-attribute 'default nil :family "UDEV Gothic NF" :height 150)
 
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-default-theme))
+
 (use-package modus-themes
   :ensure t
   :custom
