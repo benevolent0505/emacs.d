@@ -355,7 +355,10 @@
 (use-package treesit-auto
   :ensure t
   :config
-  (setq treesit-auto-install t)
+  ;; 直近使いそうな言語に絞る
+  ;; Go は go-mode を使いたいので明確に抜く
+  (setq treesit-auto-langs '(bash commonlisp css dockerfile html javascript json make markdown org perl python sql toml tsx typescript yaml)
+        treesit-auto-install t)
   (global-treesit-auto-mode))
 
 (setq treesit-extra-load-path `(locate-user-emacs-file "tree-sitter"))
