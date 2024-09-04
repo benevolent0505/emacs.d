@@ -453,6 +453,19 @@
             space-mark)))
   (add-hook 'go-mode-hook #'go-mode-whitespace-style)
 
+  ;; gopls settings
+  ;; see: https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+  (setq-default eglot-workspace-configuration
+                '((:gopls .
+                          ((staticcheck . t)
+                           (matcher . "CaseSensitive")))))
+
+  ;; Organizing imports
+  (add-hook 'before-save-hook
+            (lambda ()
+              (call-interactively 'eglot-code-action-organize-imports))
+            nil t)
+
   :custom
   (gofmt-command "goimports")
   :hook
