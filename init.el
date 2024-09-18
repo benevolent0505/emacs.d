@@ -521,6 +521,18 @@
 (use-package fish-mode
   :ensure t)
 
+;; for macOS
+(when (eq system-type 'darwin)
+  (use-package copilot
+    :ensure t
+    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+    :after (editorconfig flycheck)
+    :config
+    (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
+    (setq copilot--indent-warning-printed t)
+    :hook
+    ((prog-mode . copilot-mode))))
+
 ;;; Private PC Settings
 ;; 私用だと WSL なので、この判定で十分
 (when (and (eq system-type 'gnu/linux)
