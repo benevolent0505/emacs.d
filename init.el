@@ -486,7 +486,8 @@
   :custom
   (gofmt-command "goimports")
   :hook
-  (go-mode . eglot-ensure))
+  ((go-mode . eglot-ensure)
+   (go-mode . eldoc-mode)))
 
 ;; Note: .dir-locals.el で flycheck-golangci-lint-config の設定を書くこと
 (use-package flycheck-golangci-lint
