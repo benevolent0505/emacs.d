@@ -534,7 +534,28 @@
     (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
     (setq copilot--indent-warning-printed t)
     :hook
-    ((prog-mode . copilot-mode))))
+    ((prog-mode . copilot-mode)))
+
+  ;; Terraform
+  (use-package terraform-mode
+    :ensure t
+    :config
+    (defun my-terraform-mode-init ()
+      (outline-minor-mode 1)
+      )
+
+    (add-hook 'terraform-mode-hook 'my-terraform-mode-init)
+
+    ;; LSP
+    (with-eval-after-load 'eglot
+      (add-to-list 'eglot-server-programs
+                   '(terraform-mode . ("terraform-ls" "serve")))
+      (add-hook 'terraform-mode-hook 'eglot-ensure)))
+
+  ;; Jsonnet
+  (use-package jsonnet-mode
+    :ensure t)
+  )
 
 ;;; Private PC Settings
 ;; 私用だと WSL なので、この判定で十分
