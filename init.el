@@ -343,7 +343,15 @@
   :config
   (setq eglot-events-buffer-size 0
         eglot-ignored-server-capabilities '(:inlayHintProvider)
-        eglot-confirm-server-initiated-edits nil))
+        eglot-confirm-server-initiated-edits nil)
+
+  ;; Organizing imports
+  (defun my/eglot-organize-imports ()
+    (interactive)
+    (eglot-code-actions nil nil "source.organizeImports" t))
+  (add-hook 'before-save-hook #'my/eglot-organize-imports)
+  ;; Format
+  (add-hook 'before-save-hook #'eglot-format-buffer))
 
 (use-package eglot-booster
   :ensure t
@@ -474,12 +482,6 @@
                 '((:gopls .
                           ((staticcheck . t)
                            (matcher . "CaseSensitive")))))
-
-  ;; Organizing imports
-  (add-hook 'before-save-hook
-            (lambda ()
-              (call-interactively 'eglot-code-action-organize-imports))
-            nil t)
 
   :custom
   (gofmt-command "goimports")
