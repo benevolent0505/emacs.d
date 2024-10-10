@@ -348,10 +348,15 @@
   ;; Organizing imports
   (defun my/eglot-organize-imports ()
     (interactive)
-    (eglot-code-actions nil nil "source.organizeImports" t))
+    (when (eglot-managed-p)
+      (eglot-code-actions nil nil "source.organizeImports" t)))
   (add-hook 'before-save-hook #'my/eglot-organize-imports)
+  (defun my/eglot-format-buffer ()
+    (interactive)
+    (when (eglot-managed-p)
+      (eglot-format-buffer)))
   ;; Format
-  (add-hook 'before-save-hook #'eglot-format-buffer))
+  (add-hook 'before-save-hook #'my/eglot-format-buffer))
 
 (use-package eglot-booster
   :ensure t
