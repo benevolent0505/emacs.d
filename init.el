@@ -338,37 +338,33 @@
     ;; Go の devcontainer 向け定設
     (add-to-list 'tramp-remote-path "/go/bin")))
 
-(use-package eglot
+(use-package lsp-mode
   :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c l"
+        lsp-modeline-diagnostics-enable t)
   :config
-  (setq eglot-events-buffer-size 0
-        eglot-ignored-server-capabilities '(:inlayHintProvider)
-        eglot-confirm-server-initiated-edits nil)
+  ;; node_modules 以下を無視する
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\node_modules\\'")
+  :hook ((lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
-  ;; Organizing imports
-  (defun my/eglot-organize-imports ()
-    (interactive)
-    (when (eglot-managed-p)
-      (eglot-code-actions nil nil "source.organizeImports" t)))
-  (add-hook 'before-save-hook #'my/eglot-organize-imports)
-  (defun my/eglot-format-buffer ()
-    (interactive)
-    (when (eglot-managed-p)
-      (eglot-format-buffer)))
-  ;; Format
-  (add-hook 'before-save-hook #'my/eglot-format-buffer))
-
-(use-package eglot-booster
+(use-package lsp-ui
   :ensure t
-  :straight '(eglot-booster
-              :type git
-              :host github
-              :repo "jdtsmith/eglot-booster")
-  :config
-  (eglot-booster-mode))
+  :init
+  (setq lsp-ui-peek-enable t
+        lsp-ui-doc-enable t
+        lsp-ui-doc-side t)
+  :bind (:map lsp-ui-mode-map
+              ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+              ([remap xref-find-references] . lsp-ui-peek-find-references))
+  :commands lsp-ui-mode)
 
-(use-package consult-eglot
-  :ensure t)
+(use-package consult-lsp
+  :ensure t
+  :after (consult lsp-mode)
+  :bind (:map lsp-mode-map
+              ([remap xref-find-apropos] . consult-lsp-symbols)))
 
 (use-package treesit-auto
   :ensure t
@@ -444,8 +440,8 @@
   (("\\.ts\\'" . typescript-ts-mode)
    ("\\.tsx\\'" . tsx-ts-mode))
   :hook
-  ((typescript-ts-mode . eglot-ensure)
-   (tsx-ts-mode . eglot-ensure)))
+  ((typescript-ts-mode . lsp)
+   (tsx-ts-mode . lsp)))
 
 (use-package add-node-modules-path
   :ensure t
@@ -482,16 +478,23 @@
   (add-hook 'go-mode-hook #'go-mode-whitespace-style)
 
   ;; gopls settings
-  ;; see: https://github.com/golang/tools/blob/master/gopls/doc/settings.md
-  (setq-default eglot-workspace-configuration
-                '((:gopls .
-                          ((staticcheck . t)
-                           (matcher . "CaseSensitive")))))
+  ;; https://github.com/golang/tools/blob/master/gopls/doc/emacs.md#loading-lsp-mode-in-emacs
+  (eval-after-load 'lsp-mode
+    (add-hook 'go-mode-hook #'lsp-deferred))
+
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
   :custom
-  (gofmt-command "goimports")
+  ((gofmt-command "goimports")
+   (lsp-register-custom-settings
+    '(("gopls.completeUnimported" t t)
+     ("gopls.staticcheck" t t))))
+
   :hook
-  ((go-mode . eglot-ensure)
+  ((go-mode . lsp-deferred)
    (go-mode . eldoc-mode)))
 
 ;; Note: .dir-locals.el で flycheck-golangci-lint-config の設定を書くこと
@@ -549,13 +552,7 @@
       (outline-minor-mode 1)
       )
 
-    (add-hook 'terraform-mode-hook 'my-terraform-mode-init)
-
-    ;; LSP
-    (with-eval-after-load 'eglot
-      (add-to-list 'eglot-server-programs
-                   '(terraform-mode . ("terraform-ls" "serve")))
-      (add-hook 'terraform-mode-hook 'eglot-ensure)))
+    (add-hook 'terraform-mode-hook 'my-terraform-mode-init))
 
   ;; Jsonnet
   (use-package jsonnet-mode
