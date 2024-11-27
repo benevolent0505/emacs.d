@@ -405,7 +405,9 @@
 (use-package flycheck-posframe
   :ensure t
   :after flycheck
-  :config (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
+  :config
+  (flycheck-posframe-configure-pretty-defaults)
+  (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 
 (use-package eldoc
   :ensure t)
