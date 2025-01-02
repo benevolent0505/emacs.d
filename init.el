@@ -532,17 +532,18 @@
 (use-package fish-mode
   :ensure t)
 
+(use-package copilot
+  :ensure t
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
+  :after (editorconfig flycheck)
+  :config
+  (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
+  (setq copilot--indent-warning-printed t)
+  :hook
+  ((prog-mode . copilot-mode)))
+
 ;; for macOS
 (when (eq system-type 'darwin)
-  (use-package copilot
-    :ensure t
-    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
-    :after (editorconfig flycheck)
-    :config
-    (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
-    (setq copilot--indent-warning-printed t)
-    :hook
-    ((prog-mode . copilot-mode)))
 
   ;; Terraform
   (use-package terraform-mode
