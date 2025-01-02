@@ -582,43 +582,5 @@
       (shell-command-to-string "powershell.exe -command 'Get-Clipboard'"))))
 
   (setq visible-bell t)
+  )
 
-  (use-package auth-source-1password
-    :straight '(auth-source-1password
-                :type git
-                :host github
-                :repo "dlobraico/auth-source-1password")
-    :ensure t
-    :custom
-    (auth-source-1password-executable "op.exe") ;; for WSL
-    :init
-    (auth-source-1password-enable))
-
-  (use-package llm
-    :ensure t
-    :straight '(llm
-                :type git
-                :host github
-                :repo "ahyatt/llm"))
-
-  (use-package ellama
-    :ensure t
-    :requires (llm)
-    :init
-    (require 'llm-gemini)
-    ;; ellama-translateで翻訳する言語
-    (setopt ellama-language "Japanese")
-
-    ;; ellama-ask-selection などで生成されるファイルのネーミングルール
-    (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
-
-    ;; デフォルトのプロバイダー
-    (setopt ellama-provider (make-llm-gemini
-                             :key (auth-source-pick-first-password :host "GoogleGeminiAPIKey" :user "key")
-                             :chat-model "gemini-1.5-flash"))
-
-    ;; プロンプトの上書き
-    ;; see: https://qiita.com/keita44_f4/items/2386e1623b3e3199efc0
-    (setopt ellama-summarize-prompt-template "Text:\n%s\n要約して")
-    (setopt ellama-generate-commit-message-template "あなたは熟練のプログラマーです。後の変更点をもとに完結なコミットメッセージを書いてください。コミットメッセージの形式は、1行目は変更点の要約、2行目は空行、それ以降の行は変更全体の詳細な説明です、です。出力はプロンプト無しで最終的なコミットメッセージだけにしてください。\n\n変更点:\n%s\n")
-    ))
