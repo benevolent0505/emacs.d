@@ -542,6 +542,10 @@
   :hook
   ((prog-mode . copilot-mode)))
 
+(use-package copilot-chat
+  :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
+  :after (request org markdown-mode shell-maker))
+
 ;; for macOS
 (when (eq system-type 'darwin)
 
