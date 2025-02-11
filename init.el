@@ -65,6 +65,14 @@
       size-indication-mode t
       use-short-answers t)
 
+(with-eval-after-load 'simple
+  (setopt idle-update-delay 1.0))
+
+(with-eval-after-load 'frame
+  (blink-cursor-mode -1))
+
+(global-display-line-numbers-mode)
+
 (use-package exec-path-from-shell
   :ensure t
   :config
