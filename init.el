@@ -33,11 +33,15 @@
 (unless (server-running-p)
   (server-start))
 
-(setq warning-minimum-log-level :error)
-
 (use-package comp
-  :custom
-  (native-comp-async-report-warnings-errors nil))
+  :config
+  (setopt native-comp-async-jobs-number 8
+          native-comp-speed 1
+          native-comp-always-compile t))
+
+(use-package warnings
+  :config
+  (setopt warning-suppress-types '((native-compiler))))
 
 (setq auto-save-timeout 15
       auto-save-interval 60
