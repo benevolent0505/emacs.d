@@ -355,19 +355,28 @@
   :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l"
-        lsp-modeline-diagnostics-enable t)
+        lsp-modeline-diagnostics-enable t
+        lsp-use-plists t
+        lsp-log-io nil)
   :config
-  ;; node_modules 以下を無視する
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\node_modules\\'")
-  :hook ((lsp-mode . lsp-enable-which-key-integration))
-  :commands lsp)
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\tmp\\'")
+
+  (defun lsp-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'lsp-mode-hook #'lsp-save-hooks)
+
+  :hook ((lsp-mode . lsp-enable-which-key-integration)
+         (go-mode . lsp-deferred))
+  :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
   :ensure t
   :init
   (setq lsp-ui-peek-enable t
         lsp-ui-doc-enable t
-        lsp-ui-doc-side t)
+        lsp-ui-doc-side t
+        lsp-idle-delay 0.500)
   :bind (:map lsp-ui-mode-map
               ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
               ([remap xref-find-references] . lsp-ui-peek-find-references))
