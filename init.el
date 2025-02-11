@@ -119,10 +119,13 @@
 
 (set-face-attribute 'default nil :family "UDEV Gothic NF" :height 150)
 
-(use-package powerline
+;; Modeline
+(use-package doom-modeline
   :ensure t
-  :config
-  (powerline-default-theme))
+  :custom
+  ((doom-modeline-battery nil)
+   (doom-modeline-time nil))
+  :init (doom-modeline-mode 1))
 
 (use-package modus-themes
   :ensure t
