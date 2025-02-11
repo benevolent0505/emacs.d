@@ -127,10 +127,10 @@
 (use-package modus-themes
   :ensure t
   :custom
-  (modus-themes-bold-constructs t)
-  (modus-themes-italic-constructs t)
+  ((modus-themes-bold-constructs t)
+   (modus-themes-italic-constructs t))
   :config
-  (load-theme 'modus-vivendi-deuteranopia t))
+  (load-theme 'modus-vivendi-tinted t))
 
 (setq-default indent-tabs-mode nil
               tab-width 2
