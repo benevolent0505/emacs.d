@@ -43,24 +43,27 @@
   :config
   (setopt warning-suppress-types '((native-compiler))))
 
-(setq auto-save-timeout 15
-      auto-save-interval 60
-      backup-directory-alist `((".*" . ,(locate-user-emacs-file "backup")))
+(setq auto-save-timeout 30
+      auto-save-interval 300
       auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup/") t))
-      version-control t
-      delete-old-versions t)
+      backup-directory-alist `((".*" . ,(locate-user-emacs-file "backup")))
+      create-lockfile nil
+      delete-old-versions t
+      version-control t)
 
-(setq create-lockfile nil
+(setq column-number-mode t
       debug-on-error t
-      frame-resize-pixelwise t
       enable-recursive-minibuffers t
+      frame-resize-pixelwise t
+      frame-inhibit-implied-resize t
+      hisotry-length 1000
       history-delete-duplicates t
+      mouse-wheel-scroll-amout '(1 ((control) . 5))
+      ring-bell-function 'ignore
       scroll-preserver-screen-position t
       scroll-conservatively 100
-      mouse-wheel-scroll-amout '(1 ((control) . 5))
-      column-number-mode t
       size-indication-mode t
-      hisotry-length 1000)
+      use-short-answers t)
 
 (use-package exec-path-from-shell
   :ensure t
