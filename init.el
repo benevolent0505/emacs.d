@@ -117,8 +117,6 @@
      (cl-callf color-saturate-name (face-foreground face) 30)))
   :hook prog-mode)
 
-(set-face-attribute 'default nil :family "UDEV Gothic NF" :height 150)
-
 ;; Modeline
 (use-package doom-modeline
   :ensure t
