@@ -491,26 +491,12 @@
             spaces
             space-mark)))
   (add-hook 'go-mode-hook #'go-mode-whitespace-style)
-
-  ;; gopls settings
-  ;; https://github.com/golang/tools/blob/master/gopls/doc/emacs.md#loading-lsp-mode-in-emacs
-  (eval-after-load 'lsp-mode
-    (add-hook 'go-mode-hook #'lsp-deferred))
-
-  (defun lsp-go-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-
   :custom
   ((gofmt-command "goimports")
    (lsp-register-custom-settings
     '(("gopls.completeUnimported" t t)
-     ("gopls.staticcheck" t t))))
-
-  :hook
-  ((go-mode . lsp-deferred)
-   (go-mode . eldoc-mode)))
+      ("gopls.staticcheck" t t))))
+  :hook (go-mode . eldoc-mode))
 
 ;; Note: .dir-locals.el で flycheck-golangci-lint-config の設定を書くこと
 (use-package flycheck-golangci-lint
