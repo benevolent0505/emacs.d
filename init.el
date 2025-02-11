@@ -4,8 +4,8 @@
 
 (require 'package)
 (setopt package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-        ("gnu" . "https://elpa.gnu.org/packages/")))
+        '(("melpa" . "https://melpa.org/packages/")
+          ("gnu" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 
 (defvar bootstrap-version)
