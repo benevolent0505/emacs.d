@@ -73,9 +73,12 @@
 
 (use-package visual-regexp
   :ensure t
+  :bind
+  (("M-%" . 'vr/replace)
+   ("C-M-%" . 'vr/query-replace)
+   ("C-c m" . 'vr/mc-mark)))
+
   :config
-  (define-key global-map (kbd "C-c r") 'vr/replace)
-  (define-key global-map (kbd "C-c q") 'vr/query-replace))
 
 (use-package autorevert
   :custom
