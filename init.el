@@ -78,8 +78,6 @@
    ("C-M-%" . 'vr/query-replace)
    ("C-c m" . 'vr/mc-mark)))
 
-  :config
-
 (use-package autorevert
   :custom
   (auto-revert-interval 1)
