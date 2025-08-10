@@ -141,6 +141,12 @@
   :init
   (electric-pair-mode t))
 
+(use-package puni
+  :ensure t
+  :init
+  (puni-global-mode)
+  (add-hook 'term-mode-hook #'puni-disable-puni-mode))
+
 (use-package ace-window
   :ensure t
   :init
