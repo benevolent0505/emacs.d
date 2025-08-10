@@ -125,13 +125,9 @@
    (doom-modeline-time nil))
   :init (doom-modeline-mode 1))
 
-(use-package modus-themes
-  :ensure t
-  :custom
-  ((modus-themes-bold-constructs t)
-   (modus-themes-italic-constructs t))
-  :config
-  (load-theme 'modus-vivendi-tinted t))
+(setopt modus-themes-bold-constructs t
+	      modus-themes-italic-constructs t)
+(load-theme 'modus-vivendi-deuteranopia t)
 
 (setq-default indent-tabs-mode nil
               tab-width 2
