@@ -24,8 +24,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(setq package-enable-at-startup nil)
-
 (require 'use-package)
 (straight-use-package 'use-package)
 
@@ -39,31 +37,26 @@
           native-comp-speed 1
           native-comp-always-compile t))
 
-(use-package warnings
-  :config
-  (setopt warning-suppress-types '((native-compiler))))
+(setq create-lockfile nil)
 
-(setq auto-save-timeout 30
-      auto-save-interval 300
-      auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup/") t))
-      backup-directory-alist `((".*" . ,(locate-user-emacs-file "backup")))
-      create-lockfile nil
-      delete-old-versions t
-      version-control t)
-
-(setq column-number-mode t
-      debug-on-error t
-      enable-recursive-minibuffers t
-      frame-resize-pixelwise t
-      frame-inhibit-implied-resize t
-      hisotry-length 1000
-      history-delete-duplicates t
-      mouse-wheel-scroll-amout '(1 ((control) . 5))
-      ring-bell-function 'ignore
-      scroll-preserver-screen-position t
-      scroll-conservatively 100
-      size-indication-mode t
-      use-short-answers t)
+(setopt auto-save-timeout 30
+        auto-save-interval 300
+        auto-save-file-name-transforms `((".*" ,(locate-user-emacs-file "backup/") t))
+        backup-directory-alist `((".*" . ,(locate-user-emacs-file "backup")))
+        delete-old-versions t
+        version-control t
+        column-number-mode t
+        enable-recursive-minibuffers t
+        frame-resize-pixelwise t
+        frame-inhibit-implied-resize t
+        history-length 1000
+        history-delete-duplicates t
+        mouse-wheel-scroll-amount '(1 ((control) . 5))
+        ring-bell-function 'ignore
+        scroll-preserve-screen-position t
+        scroll-conservatively 100
+        size-indication-mode t
+        use-short-answers t)
 
 (with-eval-after-load 'simple
   (setopt idle-update-delay 1.0))
