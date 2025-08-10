@@ -91,14 +91,18 @@
 
 (use-package ddskk
   :ensure t
+  :custom
+  ((skk-server-host "localhost")
+   (skk-server-portnum 1178)
+   (skk-japanese-message-and-error t)
+   (skk-dcomp-activate t)
+   (skk-comp-prefix t)
+   (skk-share-private-jisyo t))
   :init
-  (setq skk-server-host "localhost"
-        skk-server-portnum 1178
-        skk-japanese-message-and-error t
-        skk-dcomp-activate t
-        skk-comp-prefix t
-        skk-share-private-jisyo t)
-  :bind ("C-j" . skk-mode))
+  (defvar dired-bind-jump nil) ;; dired-x C-x C-j が奪われないように
+  :bind
+  (("C-j" . skk-mode)
+   ("C-x C-j" . skk-mode)))
 
 (use-package rainbow-delimiters
   :ensure t
