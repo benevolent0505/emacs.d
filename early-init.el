@@ -8,6 +8,7 @@
 (push '(tool-bar-lines . 0) default-frame-alist)
 
 (scroll-bar-mode -1)
+(tab-bar-mode t)
 
 ;; GC
 ;; see: https://zenn.dev/takeokunn/articles/56010618502ccc#gc%E3%81%AE%E8%A8%AD%E5%AE%9A
