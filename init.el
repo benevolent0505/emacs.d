@@ -118,10 +118,8 @@
 ;; Modeline
 (use-package doom-modeline
   :ensure t
-  :custom
-  ((doom-modeline-battery nil)
-   (doom-modeline-time nil))
-  :init (doom-modeline-mode 1))
+  :init
+  (doom-modeline-mode 1))
 
 (setopt modus-themes-bold-constructs t
 	      modus-themes-italic-constructs t)
