@@ -155,7 +155,6 @@
   ("C-x o" . ace-window))
 
 (use-package which-key
-  :ensure t
   :config
   (which-key-mode))
 
