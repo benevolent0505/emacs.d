@@ -176,6 +176,12 @@
   :init
   (recentf-mode t))
 
+(use-package helpful
+  :ensure t
+  :bind
+  (("C-c C-d" . #'helpful-at-point)
+   ("C-h v" . #'helpful-variable)))
+
 (use-package vertico
   :ensure t
   :init
