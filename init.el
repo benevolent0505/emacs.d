@@ -594,7 +594,7 @@
   :config
   (setq copilot-indent-offset-warning-disable t)
   (define-key copilot-completion-map (kbd "C-t") 'copiot-accept-completion)
-  :hook (prog-mode . copilit-mode))
+  :hook (prog-mode . copilot-mode))
 
 
 
