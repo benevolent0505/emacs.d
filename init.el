@@ -370,7 +370,8 @@
   (add-hook 'lsp-mode-hook #'lsp-save-hooks)
 
   :hook ((lsp-mode . lsp-enable-which-key-integration)
-         (go-mode . lsp-deferred))
+         (go-mode . lsp-deferred)
+         (graphql-mode . lsp))
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
