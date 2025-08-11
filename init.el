@@ -366,7 +366,6 @@
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\tmp\\'")
 
   (defun lsp-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
     (add-hook 'before-save-hook #'lsp-organize-imports t t))
   (add-hook 'lsp-mode-hook #'lsp-save-hooks)
 
@@ -549,7 +548,9 @@
    (lsp-register-custom-settings
     '(("gopls.completeUnimported" t t)
       ("gopls.staticcheck" t t))))
-  :hook (go-mode . eldoc-mode))
+  :hook
+  ((go-mode . eldoc-mode)
+   (before-save-hook . gofmt-before-save)))
 
 ;; Note: .dir-locals.el で flycheck-golangci-lint-config の設定を書くこと
 (use-package flycheck-golangci-lint
