@@ -587,18 +587,27 @@
   :ensure t)
 
 (use-package copilot
-  :ensure t
-  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
-  :after (editorconfig flycheck)
+  :after (editorconfig f)
+  :vc (:url "https://github.com/copilot-emacs/copilot.el"
+            :rev :newest
+            :branch "main")
   :config
-  (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
-  (setq copilot--indent-warning-printed t)
-  :hook
-  ((prog-mode . copilot-mode)))
+  (setq copilot-indent-offset-warning-disable t)
+  (define-key copilot-completion-map (kbd "C-t") 'copiot-accept-completion)
+  :hook (prog-mode . copilit-mode))
 
-(use-package copilot-chat
-  :straight (:host github :repo "chep/copilot-chat.el" :files ("*.el"))
-  :after (request org markdown-mode shell-maker))
+
+
+
+
+
+
+
+
+
+
+
+
 
 ;; for macOS
 (when (eq system-type 'darwin)
