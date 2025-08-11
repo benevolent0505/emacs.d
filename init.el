@@ -499,6 +499,9 @@
   :mode
   (("\\.ts\\'" . typescript-ts-mode)
    ("\\.tsx\\'" . tsx-ts-mode))
+  :custom
+  ((typescript-indent-level 2)
+   (typescript-ts-mode-indent-offset 2))
   :hook
   ((typescript-ts-mode . lsp)
    (tsx-ts-mode . lsp)))
