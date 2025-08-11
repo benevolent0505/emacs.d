@@ -502,6 +502,11 @@
   :custom
   ((typescript-indent-level 2)
    (typescript-ts-mode-indent-offset 2))
+  :config
+  (defun disable-lsp-format-buffer ()
+    (setq-local lsp-format-buffer nil))
+  (add-hook 'typescript-ts-mode-hook #'disable-lsp-format-buffer)
+  (add-hook 'tsx-ts-mode-hook #'disable-lsp-format-buffer)
   :hook
   ((typescript-ts-mode . lsp)
    (tsx-ts-mode . lsp)))
