@@ -649,3 +649,5 @@
   (setq visible-bell t)
   )
 
+;; テスト用メッセージ。ここまで到達できるかどうかをチェックする
+(message "End of loading init.el.")
