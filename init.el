@@ -61,12 +61,12 @@
 (global-display-line-numbers-mode)
 
 (use-package exec-path-from-shell
-  :ensure t
+  :straight t
   :config
   (exec-path-from-shell-initialize))
 
 (use-package visual-regexp
-  :ensure t
+  :straight t
   :bind
   (("M-%" . 'vr/replace)
    ("C-M-%" . 'vr/query-replace)
@@ -82,7 +82,7 @@
 (prefer-coding-system 'utf-8)
 
 (use-package ddskk
-  :ensure t
+  :straight t
   :custom
   ((skk-server-host "localhost")
    (skk-server-portnum 1178)
@@ -97,7 +97,7 @@
    ("C-x C-j" . skk-mode)))
 
 (use-package rainbow-delimiters
-  :ensure t
+  :straight t
   :config
   ;; https://murase-syuka.hatenablog.com/entry/20140815/1408061850
   (require 'cl-lib)
@@ -111,7 +111,7 @@
 
 ;; Modeline
 (use-package doom-modeline
-  :ensure t
+  :straight t
   :init
   (doom-modeline-mode 1))
 
@@ -142,7 +142,7 @@
   (add-hook 'term-mode-hook #'puni-disable-puni-mode))
 
 (use-package ace-window
-  :ensure t
+  :straight t
   :init
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   :bind
@@ -177,7 +177,7 @@
    ("C-h v" . #'helpful-variable)))
 
 (use-package vertico
-  :ensure t
+  :straight t
   :init
   (vertico-mode)
   :custom
@@ -191,7 +191,7 @@
 
 (use-package vertico-directory
   :after vertico
-  :ensure nil
+  :straight t
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
               ("DEL" . vertico-directory-delete-char)
@@ -199,19 +199,19 @@
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
 (use-package orderless
-  :ensure t
+  :straight t
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles . (partial-completion))))))
 
 (use-package marginalia
-  :ensure t
+  :straight t
   :init
   (marginalia-mode))
 
 (use-package consult
-  :ensure t
+  :straight t
   :bind (("C-c h" . consult-history)
          ("C-x b" . consult-buffer)
          ("C-x p b" . consult-project-buffer)
@@ -232,7 +232,7 @@
         xref-show-definitions-function #'consult-xref))
 
 (use-package affe
-  :ensure t
+  :straight t
   :init
   (setq affe-highlight-function 'orderless-highlight-matches
         affe-regexp-function 'orderless-pattern-compiler
@@ -242,12 +242,12 @@
    ("M-s f" . affe-find)))
 
 (use-package consult-ghq
-  :ensure t
+  :straight t
   :init
   (global-set-key (kbd "C-c g") 'consult-ghq-find))
 
 (use-package editorconfig
-  :ensure t
+  :straight t
   :straight '(editorconfig
               :type git
               :host github
@@ -256,16 +256,16 @@
   (editorconfig-mode 1))
 
 (use-package yasnippet
-  :ensure t
+  :straight t
   :init
   (yas-global-mode 1))
 
 (use-package consult-yasnippet
-  :ensure t
+  :straight t
   :after (consult yasnippet))
 
 (use-package company
-  :ensure t
+  :straight t
   :after company-statistics
   :bind (("M-<tab>" . company-complete)
          :map company-active-map
@@ -289,7 +289,7 @@
         company-transformers '(company-sort-by-occurrence company-sort-by-backend-importance)))
 
 (use-package company-statistics
-  :ensure t
+  :straight t
   :init
   (company-statistics-mode))
 
@@ -298,7 +298,7 @@
               :type git
               :host github
               :repo "zk-phi/company-dwim")
-  :ensure t
+  :straight t
   :init
   (define-key company-active-map (kbd "TAB") 'company-dwim)
   (setq company-frontends
@@ -311,7 +311,7 @@
               :type git
               :host github
               :repo "zk-phi/company-anywhere")
-  :ensure t)
+  :straight t)
 
 (use-package company-same-mode-buffers
   :straight '(company-same-mode-buffers
@@ -319,7 +319,7 @@
               :host github
               :repo "zk-phi/company-same-mode-buffers")
   :after company
-  :ensure t
+  :straight t
   :init
   (require 'company-same-mode-buffers)
   (company-same-mode-buffers-initialize)
@@ -350,7 +350,7 @@
     (add-to-list 'tramp-remote-path "/go/bin")))
 
 (use-package lsp-mode
-  :ensure t
+  :straight t
   :init
   (setq lsp-keymap-prefix "C-c l"
         lsp-modeline-diagnostics-enable t
@@ -369,7 +369,7 @@
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
-  :ensure t
+  :straight t
   :init
   (setq lsp-ui-peek-enable t
         lsp-ui-doc-enable t
@@ -381,7 +381,7 @@
   :commands lsp-ui-mode)
 
 (use-package consult-lsp
-  :ensure t
+  :straight t
   :after (consult lsp-mode)
   :bind (:map lsp-mode-map
               ([remap xref-find-apropos] . consult-lsp-symbols)))
@@ -482,7 +482,7 @@
    (git-link-use-single-line-number t)))
 
 (use-package js2-mode
-  :ensure t
+  :straight t
   :custom
   (js-indent-level 2)
   :hook
@@ -573,14 +573,14 @@
   :ensure t)
 
 (use-package markdown-mode
-  :ensure t
+  :straight t
   :mode ("\\.md\\'" . gfm-mode)
   :config
   (setopt markdown-fontify-code-blocks-natively t)
   (setopt markdown-indent-on-enter 'indent-and-new-item))
 
 (use-package fish-mode
-  :ensure t)
+  :straight t)
 
 (use-package copilot
   :after (editorconfig f)
