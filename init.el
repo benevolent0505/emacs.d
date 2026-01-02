@@ -135,12 +135,6 @@
   :init
   (electric-pair-mode t))
 
-(use-package puni
-  :ensure t
-  :init
-  (puni-global-mode)
-  (add-hook 'term-mode-hook #'puni-disable-puni-mode))
-
 (use-package ace-window
   :straight t
   :init
@@ -169,12 +163,6 @@
 (use-package recentf
   :init
   (recentf-mode t))
-
-(use-package helpful
-  :ensure t
-  :bind
-  (("C-c C-d" . #'helpful-at-point)
-   ("C-h v" . #'helpful-variable)))
 
 (use-package vertico
   :straight t
@@ -331,14 +319,6 @@
           company-files
           company-dabbrev)))
 
-(use-package mistty
-  :ensure t
-  :bind (("C-c s" . mistty)
-         :map mistty-prompt-map
-         ("M-<up>" . mistty-send-key)
-         ("M-<down>" . mistty-send-key)
-         ("M-<left>" . mistty-send-key)
-         ("M-<right>" . mistty-send-key)))
 
 (use-package tramp
   :custom
