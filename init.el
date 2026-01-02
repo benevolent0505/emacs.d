@@ -1,3 +1,5 @@
+;;; Bootstrap & Package Management
+
 ;; https://tarao.hatenablog.com/entry/20150221/1424518030#tips-isolated-setup
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
@@ -24,6 +26,8 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
+
+;;; Basic Settings
 
 (use-package comp
   :config
@@ -96,6 +100,8 @@
   (("C-j" . skk-mode)
    ("C-x C-j" . skk-mode)))
 
+;;; UI & Display
+
 (use-package rainbow-delimiters
   :straight t
   :config
@@ -163,6 +169,8 @@
 (use-package recentf
   :init
   (recentf-mode t))
+
+;;; Completion Framework
 
 (use-package vertico
   :straight t
@@ -232,6 +240,8 @@
   :straight t
   :init
   (global-set-key (kbd "C-c g") 'consult-ghq-find))
+
+;;; Editor & LSP
 
 (use-package editorconfig
   :config
@@ -444,6 +454,8 @@
 (use-package eldoc
   :straight t)
 
+;;; Version Control
+
 (use-package magit
   :straight t
   :bind ("C-c b" . magit-blame))
@@ -460,6 +472,8 @@
   ((git-link-open-in-browser t)
    (git-link-use-commit t)
    (git-link-use-single-line-number t)))
+
+;;; Language-Specific Settings
 
 (use-package js2-mode
   :straight t
@@ -589,6 +603,8 @@
 
 (use-package jsonnet-mode
   :straight t)
+
+;;; Platform-Specific (WSL)
 
 ;; for wsl
 (defvar in-wsl-p
