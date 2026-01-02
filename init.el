@@ -454,14 +454,14 @@
   (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
 
 (use-package flycheck-posframe
-  :ensure t
+  :straight t
   :after flycheck
   :config
   (flycheck-posframe-configure-pretty-defaults)
   (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode))
 
 (use-package eldoc
-  :ensure t)
+  :straight t)
 
 (use-package magit
   :straight t
@@ -474,7 +474,7 @@
   (global-git-gutter-mode))
 
 (use-package git-link
-  :ensure t
+  :straight t
   :custom
   ((git-link-open-in-browser t)
    (git-link-use-commit t)
