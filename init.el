@@ -2,12 +2,6 @@
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
-(require 'package)
-(setopt package-archives
-        '(("melpa" . "https://melpa.org/packages/")
-          ("gnu" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
