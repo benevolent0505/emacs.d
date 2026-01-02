@@ -593,6 +593,10 @@
   :hook (prog-mode . copilot-mode))
 
 
+;; for wsl
+(defvar in-wsl-p
+  (and (eq system-type 'gnu/linux)
+       (string-match-p "microsoft" (shell-command-to-string "uname -a"))))
 
 
 
@@ -622,11 +626,7 @@
   (use-package jsonnet-mode
     :ensure t)
   )
-
-;;; Private PC Settings
-;; 私用だと WSL なので、この判定で十分
-(when (and (eq system-type 'gnu/linux)
-           (getenv "WSL_DISTRO_NAME"))
+(when in-wsl-p
   (defun wsl-copy (start end)
     (interactive "r")
     (shell-command-on-region start end "clip.exe"))
@@ -639,9 +639,7 @@
       "\^M"
       ""
       (shell-command-to-string "powershell.exe -command 'Get-Clipboard'"))))
-
-  (setq visible-bell t)
-  )
+  (setq visible-bell t))
 
 ;; テスト用メッセージ。ここまで到達できるかどうかをチェックする
 (message "End of loading init.el.")
