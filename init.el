@@ -332,9 +332,12 @@
     (add-hook 'before-save-hook #'lsp-organize-imports t t))
   (add-hook 'lsp-mode-hook #'lsp-save-hooks)
 
-  :hook ((lsp-mode . lsp-enable-which-key-integration)
-         (go-mode . lsp-deferred)
-         (graphql-mode . lsp))
+  :hook
+  ((lsp-mode . lsp-enable-which-key-integration)
+   (typescript-ts-mode . lsp-mode)
+   (tsx-ts-mode . lsp-mode)
+   (go-mode . lsp-deferred)
+   (graphql-mode . lsp-deferred))
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
