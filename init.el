@@ -479,43 +479,44 @@
   :hook
   (js-mode-hook . js2-minor-mode))
 
-(use-package typescript-mode
-  :ensure t
-  :mode
-  (("\\.ts\\'" . typescript-ts-mode)
-   ("\\.tsx\\'" . tsx-ts-mode))
+(use-package typescript-ts-mode
+  :mode ("\\.ts\\'" . typescript-ts-mode)
   :custom
-  ((typescript-indent-level 2)
-   (typescript-ts-mode-indent-offset 2))
-  :config
-  (defun disable-lsp-format-buffer ()
-    (setq-local lsp-format-buffer nil))
-  (add-hook 'typescript-ts-mode-hook #'disable-lsp-format-buffer)
-  (add-hook 'tsx-ts-mode-hook #'disable-lsp-format-buffer)
-  :hook
-  ((typescript-ts-mode . lsp)
-   (tsx-ts-mode . lsp)))
+  (typescript-ts-mode-indent-offset 2))
+
+(use-package tsx-ts-mode
+  :mode ("\\.tsx\\'" . tsx-ts-mode))
+
+(defun disable-lsp-format-buffer ()
+  (setq-local lsp-format-buffer nil))
+(with-eval-after-load 'typescript-ts-mode
+  (add-hook 'typescript-ts-mode-hook #'disable-lsp-format-buffer))
+(with-eval-after-load 'tsx-ts-mode
+  (add-hook 'typescript-ts-mode-hook #'disable-lsp-format-buffer))
 
 (use-package add-node-modules-path
-  :ensure t
-  :config
-  (setq add-node-modules-path-command '("echo \"$(npm root)/.bin\""))
-  (add-hook 'typescript-ts-mode-hook #'add-node-modules-path)
-  (add-hook 'tsx-ts-mode-hook #'add-node-modules-path))
+  :straight t
+  :custom
+  (add-node-modules-path-command '("pnpm bin" "pnpm bin -w"))
+  :hook
+  ((js-mode-hook . add-node-modules-path)
+   (typescript-ts-mode . add-node-modules-path)
+   (tsx-ts-mode . add-node-modules-path)))
 
 (use-package web-mode
-  :ensure t
+  :straight t
   :mode (("\\.html?\\'" . web-mode))
   :custom
   (web-mode-markup-indent-offset 2)
   (web-mode-code-indent-offset 2)
   (web-mode-css-indent-offset 2))
 
-(use-package prettier
-  :ensure t
-  :hook
-  ((typescript-ts-mode . prettier-mode)
-   (tsx-ts-mode . prettier-mode)))
+(use-package prettier-js
+  :straight t
+  :config
+  (setq prettier-js-use-modules-bin t)
+  :hook ((typescript-ts-mode . prettier-js-mode)
+         (tsx-ts-mode . prettier-js-mode)))
 
 ;;; Golang
 (use-package go-mode
