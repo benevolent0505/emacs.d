@@ -572,6 +572,10 @@
 (use-package graphql-mode
   :straight t)
 
+(use-package yaml-mode
+  :straight t
+  :mode ("\\.yml" . yaml-mode))
+
 (use-package markdown-mode
   :straight t
   :mode ("\\.md\\'" . gfm-mode)
@@ -590,40 +594,21 @@
     (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
     :hook (prog-mode . copilot-mode)))
 
+(use-package terraform-mode
+  :straight t
+  :config
+  (defun my/terraform-mode-init ()
+    (outline-minor-mode 1))
+  (add-hook 'terraform-mode-hook #'my/terraform-mode-init))
+
+(use-package jsonnet-mode
+  :straight t)
 
 ;; for wsl
 (defvar in-wsl-p
   (and (eq system-type 'gnu/linux)
        (string-match-p "microsoft" (shell-command-to-string "uname -a"))))
 
-
-
-
-
-
-
-
-
-
-
-
-;; for macOS
-(when (eq system-type 'darwin)
-
-  ;; Terraform
-  (use-package terraform-mode
-    :ensure t
-    :config
-    (defun my-terraform-mode-init ()
-      (outline-minor-mode 1)
-      )
-
-    (add-hook 'terraform-mode-hook 'my-terraform-mode-init))
-
-  ;; Jsonnet
-  (use-package jsonnet-mode
-    :ensure t)
-  )
 (when in-wsl-p
   (defun wsl-copy (start end)
     (interactive "r")
