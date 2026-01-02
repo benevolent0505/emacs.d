@@ -387,6 +387,29 @@
       orig-result)))
 (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
 
+(use-package inheritenv
+  :straight t)
+
+(use-package eat
+  :straight t)
+
+(straight-use-package
+ '(monet :type git :host github :repo "stevemolitor/monet"))
+
+(use-package claude-code
+  :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main" :depth 1
+                   :files ("*.el" (:exclude "images/*")))
+  :requires (inheritenv eat monet)
+  :bind-keymap
+  ("C-c c" . claude-code-command-map)
+  :bind
+  (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode))
+  :config
+  (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
+  (monet-mode 1)
+
+  (claude-code-mode))
+
 (use-package treesit-auto
   :ensure t
   :config
