@@ -388,27 +388,18 @@
 (use-package inheritenv
   :straight t)
 
-(use-package eat
-  :straight (:type git
-                   :host codeberg
-                   :repo "akib/emacs-eat"
-                   :files ("*.el" ("term" "term/*.el") "*.texi"
-                           "*.ti" ("terminfo/e" "terminfo/e/*")
-                           ("terminfo/65" "terminfo/65/*")
-                           ("integration" "integration/*")
-                           (:exclude ".dir-locals.el" "*-tests.el"))))
+(use-package vterm
+  :straight t)
 
 (straight-use-package
  '(monet :type git :host github :repo "stevemolitor/monet"))
 
+(setq claude-code-terminal-backend 'vterm)
 (use-package claude-code
   :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main" :depth 1
                    :files ("*.el" (:exclude "images/*")))
-  :requires (inheritenv eat monet)
   :bind-keymap
   ("C-c c" . claude-code-command-map)
-  :bind
-  (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode))
   :config
   (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
   (monet-mode 1)
