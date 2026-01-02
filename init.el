@@ -578,6 +578,11 @@
   (setopt markdown-fontify-code-blocks-natively t)
   (setopt markdown-indent-on-enter 'indent-and-new-item))
 
+(use-package org
+  :config
+  (define-key org-mode-map (kbd "C-j") nil)
+  (define-key org-mode-map (kbd "C-j") 'skk-mode))
+
 (use-package fish-mode
   :straight t)
 
