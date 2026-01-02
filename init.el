@@ -410,6 +410,12 @@
 
   (claude-code-mode))
 
+(use-package mise
+  :straight t
+  :requires (inheritenv)
+  :config
+  (global-mise-mode))
+
 (use-package treesit-auto
   :ensure t
   :config
