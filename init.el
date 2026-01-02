@@ -464,8 +464,8 @@
   :ensure t)
 
 (use-package magit
-  :ensure t
-  :bind ("C-x C-b" . magit-blame))
+  :straight t
+  :bind ("C-c b" . magit-blame))
 
 (use-package git-gutter-fringe
   :straight t
