@@ -444,11 +444,9 @@
   :straight t)
 
 (use-package flycheck
-  :ensure t
-  :init
-  (global-flycheck-mode)
-  (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode)
-  (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode))
+  :straight t
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (use-package flycheck-color-mode-line
   :straight t
