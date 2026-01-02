@@ -1,7 +1,11 @@
 OUTPUT := $(shell emacs -batch -l init.el 2>&1 | tail -1)
 
-.PHONY: check
+.PHONY: clean
+clean:
+	rm -rf straight
+	rm -rf eln-cache
 
+.PHONY: check
 check:
 ifeq ($(OUTPUT),End of loading init.el.)
 	echo "Success!";
