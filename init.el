@@ -582,15 +582,13 @@
 (use-package fish-mode
   :straight t)
 
-(use-package copilot
-  :after (editorconfig f)
-  :vc (:url "https://github.com/copilot-emacs/copilot.el"
-            :rev :newest
-            :branch "main")
-  :config
-  (setq copilot-indent-offset-warning-disable t)
-  (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
-  :hook (prog-mode . copilot-mode))
+(when (executable-find "@github/copilot-language-server")
+  (use-package copilot
+    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+    :config
+    (setq copilot-indent-offset-warning-disable t)
+    (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
+    :hook (prog-mode . copilot-mode)))
 
 
 ;; for wsl
