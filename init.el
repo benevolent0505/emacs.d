@@ -327,11 +327,6 @@
         lsp-log-io nil)
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\tmp\\'")
-
-  (defun lsp-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  (add-hook 'lsp-mode-hook #'lsp-save-hooks)
-
   :hook
   ((lsp-mode . lsp-enable-which-key-integration)
    (typescript-ts-mode . lsp-mode)
