@@ -179,7 +179,6 @@
 
 (use-package vertico-directory
   :after vertico
-  :straight t
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
               ("DEL" . vertico-directory-delete-char)
@@ -319,16 +318,6 @@
           company-files
           company-dabbrev)))
 
-
-(use-package tramp
-  :custom
-  (tramp-default-method "sshx")
-  :init
-  (with-eval-after-load 'tramp
-    (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
-    ;; Go の devcontainer 向け定設
-    (add-to-list 'tramp-remote-path "/go/bin")))
-
 (use-package lsp-mode
   :straight t
   :init
@@ -411,13 +400,6 @@
 (use-package treesit
   :config
   (setq treesit-font-lock-level 4))
-
-(use-package tree-sitter
-  :ensure t
-  :mode ("\\.ts\\'" . typescript-ts-mode)
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package flymake
   :ensure t)
