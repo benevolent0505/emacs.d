@@ -143,7 +143,7 @@
   ("C-x o" . ace-window))
 
 (use-package which-key
-  :config
+  :init
   (which-key-mode))
 
 (use-package whitespace
@@ -234,11 +234,6 @@
   (global-set-key (kbd "C-c g") 'consult-ghq-find))
 
 (use-package editorconfig
-  :straight t
-  :straight '(editorconfig
-              :type git
-              :host github
-              :repo "editorconfig/editorconfig-emacs")
   :config
   (editorconfig-mode 1))
 
