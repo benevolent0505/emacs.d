@@ -486,7 +486,7 @@
 (with-eval-after-load 'typescript-ts-mode
   (add-hook 'typescript-ts-mode-hook #'disable-lsp-format-buffer))
 (with-eval-after-load 'tsx-ts-mode
-  (add-hook 'typescript-ts-mode-hook #'disable-lsp-format-buffer))
+  (add-hook 'tsx-ts-mode #'disable-lsp-format-buffer))
 
 (use-package add-node-modules-path
   :straight t
