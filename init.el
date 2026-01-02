@@ -417,7 +417,7 @@
   (global-mise-mode))
 
 (use-package treesit-auto
-  :ensure t
+  :straight t
   :config
   ;; Go は go-mode を使いたいので、明示的に抜く
   ;; see: https://github.com/renzmann/treesit-auto?tab=readme-ov-file#choose-which-languages-treesit-auto-should-consider
@@ -431,7 +431,7 @@
   (setq treesit-font-lock-level 4))
 
 (use-package flymake
-  :ensure t)
+  :straight t)
 
 (use-package flycheck
   :ensure t
@@ -441,7 +441,7 @@
   (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode))
 
 (use-package flycheck-color-mode-line
-  :ensure t
+  :straight t
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-color-mode-line-mode))
 
@@ -460,7 +460,7 @@
   :bind ("C-x C-b" . magit-blame))
 
 (use-package git-gutter-fringe
-  :ensure t
+  :straight t
   :requires (git-gutter fringe-helper)
   :init
   (global-git-gutter-mode))
@@ -519,7 +519,7 @@
 
 ;;; Golang
 (use-package go-mode
-  :ensure t
+  :straight t
   :config
   (defun go-mode-whitespace-style ()
     "golang ではハードタブを可視化しない"
@@ -540,28 +540,28 @@
 
 ;; Note: .dir-locals.el で flycheck-golangci-lint-config の設定を書くこと
 (use-package flycheck-golangci-lint
-  :ensure t
+  :straight t
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
 
 (use-package go-gen-test
-  :ensure t)
+  :straight t)
 
 (use-package go-fill-struct
-  :ensure t)
+  :straight t)
 
 (use-package go-errcheck
-  :ensure t)
+  :straight t)
 
 (use-package dockerfile-mode
-  :ensure t
+  :straight t
   :mode "\\Dockerfile\\'")
 
 (use-package docker-compose-mode
-  :ensure t)
+  :straight t)
 
 (use-package graphql-mode
-  :ensure t)
+  :straight t)
 
 (use-package markdown-mode
   :straight t
