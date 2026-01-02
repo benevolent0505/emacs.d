@@ -148,7 +148,7 @@
 
 (use-package whitespace
   :custom
-  (whitespace-style '(face trailing tabs empty sparce-mark tab-mark))
+  (whitespace-style '(face trailing tabs empty space-mark tab-mark))
   :config
   (setq whitespace-space-regexp "\\(\u3000+\\)"
         whitespace-display-mappings '((space-mark ?\u3000 [?\u25a1])
