@@ -153,8 +153,8 @@
   (setq whitespace-space-regexp "\\(\u3000+\\)"
         whitespace-display-mappings '((space-mark ?\u3000 [?\u25a1])
                                       (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
-  :init
-  (global-whitespace-mode t))
+  :hook
+  ((prog-mode text-mode) . whitespace-mode))
 
 (use-package hl-line
   :init
