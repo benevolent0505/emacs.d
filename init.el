@@ -184,6 +184,8 @@
 ;; Modeline
 (use-package doom-modeline
   :straight t
+  :config
+  (setopt doom-modeline-vcs-max-length 0)
   :init
   (doom-modeline-mode 1))
 
