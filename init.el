@@ -69,6 +69,13 @@
   :config
   (exec-path-from-shell-initialize))
 
+(use-package gcmh
+  :straight t
+  :init
+  (setopt gcmh-high-cons-threshold (* 128 1024 1024))
+  :config
+  (gcmh-mode 1))
+
 (use-package visual-regexp
   :straight t
   :bind
