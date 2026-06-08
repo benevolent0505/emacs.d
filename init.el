@@ -242,12 +242,12 @@
 
 (use-package vertico
   :straight t
-  :init
-  (vertico-mode)
   :custom
-  (vertico-cycle t)
-  (vertico-count 20)
-  (vertico-resize t))
+  ((vertico-count 10)
+   (vertico-cycle t)
+   (vertico-resize t))
+  :init
+  (vertico-mode))
 
 (use-package savehist
   :init
