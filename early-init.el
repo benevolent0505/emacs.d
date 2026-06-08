@@ -23,7 +23,3 @@
 ;; font
 ;; see: https://apribase.net/2024/07/06/emacs-default-frame-alist/
 (add-to-list 'default-frame-alist '(font . "UDEV Gothic NF-16"))
-
-;; lsp-mode
-;; see: https://emacs-lsp.github.io/lsp-mode/page/performance/#use-plists-for-deserialization
-(setenv "LSP_USE_PLISTS" "true")
