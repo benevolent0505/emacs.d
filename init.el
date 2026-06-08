@@ -514,6 +514,16 @@
   :custom
   ((tramp-inline-compress-start-size 1000)))
 
+(use-package projectile
+  :straight
+  :init
+  (projectile-mode +1)
+  :custom
+  ((projectile-completion-system 'default)
+   (projectile-enable-caching t)
+   (projectile-index-method 'align)
+   (projectile-globally-ignored-directories '("node_modules" ".next"))))
+
 (use-package mise
   :straight t
   :requires (inheritenv)
