@@ -141,6 +141,9 @@
    ("C-<" . mc/mark-previous-like-this)
    ("C-c C-<" . mc/mark-all-like-this)))
 
+(use-package nerd-icons
+  :straight t)
+
 ;; Modeline
 (use-package doom-modeline
   :straight t
