@@ -250,6 +250,8 @@
   (vertico-mode))
 
 (use-package savehist
+  :custom
+  (savehist-file (locate-user-emacs-file "savehist"))
   :init
   (savehist-mode))
 
