@@ -20,7 +20,8 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(require 'use-package)
+(setopt package-enable-at-startup nil
+        package-install-upgrade-built-in t)
 (straight-use-package 'use-package)
 
 (require 'server)
