@@ -13,8 +13,11 @@
 ;; GC
 ;; see: https://zenn.dev/takeokunn/articles/56010618502ccc#gc%E3%81%AE%E8%A8%AD%E5%AE%9A
 ;; see: https://apribase.net/2024/07/23/emacs-optimize/
-(setq gc-cons-threshold (* 128 1024 1024)
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.6
       garbage-collection-messages nil)
+(setq read-process-output-max (* 3 1024 1024)
+      process-adaptive-read-buffering nil)
 
 ;; font
 ;; see: https://apribase.net/2024/07/06/emacs-default-frame-alist/
