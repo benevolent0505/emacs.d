@@ -339,10 +339,12 @@
 
 (use-package affe
   :straight t
-  :init
-  (setq affe-highlight-function 'orderless-highlight-matches
-        affe-regexp-function 'orderless-pattern-compiler
-        affe-find-command "fd --color=never --full-path")
+  :config
+  (defun affe-orderless-regexp-compiler (input _type _ignorecase)
+    (setq input (cdr (orderless-compile input)))
+    (cons input (apply-partially #'orderless--highlight input t)))
+  (setopt affe-regexp-compiler #'affe-orderless-regexp-compiler
+          affe-find-command "fd --color=never --full-path --hidden")
   :bind
   (("M-s g" . affe-grep)
    ("M-s f" . affe-find)))
