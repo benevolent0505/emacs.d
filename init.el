@@ -133,6 +133,14 @@
           pulsar-region-face 'pulsar-yellow
           pulsar-highlight-face 'pulsar-magenta))
 
+(use-package multiple-cursors
+  :straight t
+  :bind
+  (("C-S-c C-S-c" . mc/edit-lines)
+   ("C->" . mc/mark-next-like-this)
+   ("C-<" . mc/mark-previous-like-this)
+   ("C-c C-<" . mc/mark-all-like-this)))
+
 ;; Modeline
 (use-package doom-modeline
   :straight t
