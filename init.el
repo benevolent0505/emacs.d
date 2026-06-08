@@ -565,9 +565,10 @@
   :straight t
   :mode (("\\.html?\\'" . web-mode))
   :custom
-  (web-mode-markup-indent-offset 2)
-  (web-mode-code-indent-offset 2)
-  (web-mode-css-indent-offset 2))
+  ((web-mode-indent-style 2)
+   (web-mode-block-padding 2)
+   (web-mode-script-padding 2)
+   (web-mode-style-padding 2)))
 
 (use-package prettier-js
   :straight t
