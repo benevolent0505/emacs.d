@@ -122,6 +122,17 @@
      (cl-callf color-saturate-name (face-foreground face) 30)))
   :hook prog-mode)
 
+(use-package pulsar
+  :straight t
+  :init
+  (pulsar-global-mode 1)
+  :config
+  (setopt pulsar-delay 0.055
+          pulsar-iterations 5
+          pulsar-face 'pulsar-green
+          pulsar-region-face 'pulsar-yellow
+          pulsar-highlight-face 'pulsar-magenta))
+
 ;; Modeline
 (use-package doom-modeline
   :straight t
