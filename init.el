@@ -539,6 +539,9 @@
 
 (use-package flycheck
   :straight t
+  :custom
+  ((flycheck-check-syntax-automatically '(save mode-enabled))
+   (flycheck-display-errors-delay 0.5))
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
