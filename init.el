@@ -336,7 +336,6 @@
   ((lsp-mode . lsp-enable-which-key-integration)
    (typescript-ts-mode . lsp-mode)
    (tsx-ts-mode . lsp-mode)
-   (go-mode . lsp-deferred)
    (graphql-mode . lsp-deferred))
   :commands (lsp lsp-deferred))
 
@@ -389,6 +388,10 @@
           (cons "emacs-lsp-booster" orig-result))
       orig-result)))
 (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
+
+(use-package eglot
+  :custom
+  ((eglot-events-buffer-size 0)))
 
 (use-package mise
   :straight t
@@ -506,26 +509,31 @@
   :config
   (defun go-mode-whitespace-style ()
     "golang ではハードタブを可視化しない"
-    (setq whitespace-style
-          '(face
-            trailing
-            spaces
-            space-mark)))
+    (setopt whitespace-style '(face trailing spaces space-mark)))
   (add-hook 'go-mode-hook #'go-mode-whitespace-style)
+
+  (setq-default eglot-workspace-configuration
+                '((:gopls . ((staticcheck . t)
+                             (matcher . "CaseSensitive")))))
+
+  (defun eglot-format-buffer-before-save ()
+    (add-hook 'before-save-hook #'eglot-format-buffer -10 t))
+  (add-hook 'go-mode-hook #'eglot-format-buffer-before-save)
+
+  (defun eglot-organize-imports-before-save ()
+    (call-interactively 'eglot-code-action-organize-imports))
+  (add-hook 'before-save-hook #'eglot-organize-imports-before-save nil t)
   :custom
-  ((gofmt-command "goimports")
-   (lsp-register-custom-settings
-    '(("gopls.completeUnimported" t t)
-      ("gopls.staticcheck" t t))))
+  ((gofmt-command "goimports"))
   :hook
   ((go-mode . eldoc-mode)
-   (before-save-hook . gofmt-before-save)))
+   (go-mode . eglot-ensure)))
 
 ;; Note: .dir-locals.el で flycheck-golangci-lint-config の設定を書くこと
 (use-package flycheck-golangci-lint
   :straight t
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-golangci-lint-setup))
+  :hook
+  (go-mode . flycheck-golangci-lint-setup))
 
 (use-package go-gen-test
   :straight t)
