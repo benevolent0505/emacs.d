@@ -149,6 +149,37 @@
   :config
   (dashboard-setup-startup-hook))
 
+(use-package dired
+  :custom
+  ((dired-listing-switches "-alhv --group-directories-first")))
+
+(use-package treemacs
+  :straight t
+  :config
+  (setopt treemacs-is-never-other-window t
+          treemacs-text-scale -1)
+  :bind
+  (("C-x t t" . treemacs)
+   ("C-x t f" . treemacs-find-file)))
+
+(use-package treemacs-projectile
+  :straight t
+  :config
+  (treemacs-project-follow-mode))
+
+(use-package treemacs-nerd-icons
+  :straight t
+  :config
+  (treemacs-nerd-icons-config))
+
+(use-package treemacs-icons-dired
+  :straight t
+  :config
+  (treemacs-icons-dired-mode))
+
+(use-package treemacs-magit
+  :straight t)
+
 ;; Modeline
 (use-package doom-modeline
   :straight t
