@@ -393,6 +393,14 @@
   :custom
   ((eglot-events-buffer-size 0)))
 
+(use-package tramp
+  :config
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
+
+(use-package tramp-container
+  :custom
+  ((tramp-inline-compress-start-size 1000)))
+
 (use-package mise
   :straight t
   :requires (inheritenv)
