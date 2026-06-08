@@ -390,27 +390,6 @@
       orig-result)))
 (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
 
-(use-package inheritenv
-  :straight t)
-
-(use-package vterm
-  :straight t)
-
-(straight-use-package
- '(monet :type git :host github :repo "stevemolitor/monet"))
-
-(setq claude-code-terminal-backend 'vterm)
-(use-package claude-code
-  :straight (:type git :host github :repo "stevemolitor/claude-code.el" :branch "main" :depth 1
-                   :files ("*.el" (:exclude "images/*")))
-  :bind-keymap
-  ("C-c c" . claude-code-command-map)
-  :config
-  (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
-  (monet-mode 1)
-
-  (claude-code-mode))
-
 (use-package mise
   :straight t
   :requires (inheritenv)
@@ -585,14 +564,6 @@
 
 (use-package fish-mode
   :straight t)
-
-(when (executable-find "@github/copilot-language-server")
-  (use-package copilot
-    :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-    :config
-    (setq copilot-indent-offset-warning-disable t)
-    (define-key copilot-completion-map (kbd "C-t") 'copilot-accept-completion)
-    :hook (prog-mode . copilot-mode)))
 
 (use-package terraform-mode
   :straight t
