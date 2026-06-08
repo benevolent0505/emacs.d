@@ -144,6 +144,11 @@
 (use-package nerd-icons
   :straight t)
 
+(use-package dashboard
+  :straight t
+  :config
+  (dashboard-setup-startup-hook))
+
 ;; Modeline
 (use-package doom-modeline
   :straight t
