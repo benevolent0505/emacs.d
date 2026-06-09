@@ -507,7 +507,11 @@
 
 (use-package eglot
   :custom
-  ((eglot-events-buffer-size 0)))
+  ((eglot-events-buffer-size 0))
+  :config
+  ;; TypeScript/React は高速・安定な vtsls を既定にする
+  (add-to-list 'eglot-server-programs
+               '((typescript-ts-mode tsx-ts-mode) . ("vtsls" "--stdio"))))
 
 (use-package tramp
   :config
@@ -594,6 +598,7 @@
 
 ;;; Language-Specific Settings
 
+;;; JS/TS
 (use-package js2-mode
   :straight t
   :custom
@@ -604,17 +609,14 @@
 (use-package typescript-ts-mode
   :mode ("\\.ts\\'" . typescript-ts-mode)
   :custom
-  (typescript-ts-mode-indent-offset 2))
+  (typescript-ts-mode-indent-offset 2)
+  :hook
+  (typescript-ts-mode . eglot-ensure))
 
 (use-package tsx-ts-mode
-  :mode ("\\.tsx\\'" . tsx-ts-mode))
-
-(defun disable-lsp-format-buffer ()
-  (setq-local lsp-format-buffer nil))
-(with-eval-after-load 'typescript-ts-mode
-  (add-hook 'typescript-ts-mode-hook #'disable-lsp-format-buffer))
-(with-eval-after-load 'tsx-ts-mode
-  (add-hook 'tsx-ts-mode #'disable-lsp-format-buffer))
+  :mode ("\\.tsx\\'" . tsx-ts-mode)
+  :hook
+  (tsx-ts-mode . eglot-ensure))
 
 (use-package add-node-modules-path
   :straight t
@@ -633,13 +635,6 @@
    (web-mode-block-padding 2)
    (web-mode-script-padding 2)
    (web-mode-style-padding 2)))
-
-(use-package prettier-js
-  :straight t
-  :config
-  (setq prettier-js-use-modules-bin t)
-  :hook ((typescript-ts-mode . prettier-js-mode)
-         (tsx-ts-mode . prettier-js-mode)))
 
 ;;; Golang
 (use-package go-mode
