@@ -357,6 +357,25 @@
   :init
   (global-set-key (kbd "C-c g") 'consult-ghq-find))
 
+(use-package corfu
+  :straight t
+  :custom
+  ((corfu-auto t)
+   (corfu-auto-prefix 2)
+   (corfu-auto-delay 0.15)
+   (corfu-cycle t)
+   (text-mode-ispell-word-completion nil))
+  :init
+  (global-corfu-mode))
+
+(use-package cape
+  :bind
+  ("C-c p" . cape-prefix-map)
+  :init
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block))
+
 ;;; Editor & LSP
 
 (use-package editorconfig
@@ -371,73 +390,6 @@
 (use-package consult-yasnippet
   :straight t
   :after (consult yasnippet))
-
-(use-package company
-  :straight t
-  :after company-statistics
-  :bind (("M-<tab>" . company-complete)
-         :map company-active-map
-         ("M-n" . nil)
-         ("M-p" . nil)
-         ("C-n" . company-select-next)
-         ("C-p" . company-select-previous)
-         ("C-s" . company-filter-candidates)
-         :map company-search-map
-         ("C-n" . company-select-next)
-         ("C-p" . company-select-previous))
-  :init
-  (global-company-mode)
-  :config
-  (define-key emacs-lisp-mode-map (kbd "C-M-i") nil)
-  (global-set-key (kbd "C-M-i") 'company-complete)
-  (setq completion-ignore-case t
-        company-idle-delay 0
-        company-minimum-prefix-length 2
-        company-selection-wrap-around t
-        company-transformers '(company-sort-by-occurrence company-sort-by-backend-importance)))
-
-(use-package company-statistics
-  :straight t
-  :init
-  (company-statistics-mode))
-
-(use-package company-dwim
-  :straight '(company-dwim
-              :type git
-              :host github
-              :repo "zk-phi/company-dwim")
-  :straight t
-  :init
-  (define-key company-active-map (kbd "TAB") 'company-dwim)
-  (setq company-frontends
-        '(company-pseudo-tooltip-unless-just-one-frontend
-          company-dwim-frontend
-          company-echo-metadata-frontend)))
-
-(use-package company-anywhere
-  :straight '(company-anywhere
-              :type git
-              :host github
-              :repo "zk-phi/company-anywhere")
-  :straight t)
-
-(use-package company-same-mode-buffers
-  :straight '(company-same-mode-buffers
-              :type git
-              :host github
-              :repo "zk-phi/company-same-mode-buffers")
-  :after company
-  :straight t
-  :init
-  (require 'company-same-mode-buffers)
-  (company-same-mode-buffers-initialize)
-  :config
-  (setq company-backends
-        '((company-capf :with company-same-mode-buffers)
-          (company-dabbrev-code :with company-same-mode-buffers)
-          company-keywords
-          company-files
-          company-dabbrev)))
 
 (use-package eglot
   :custom
